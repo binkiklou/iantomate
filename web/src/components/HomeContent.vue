@@ -6,7 +6,7 @@ import Signatures from './Signatures.vue';
 <template>
     <div id="main-content">
         <QoD/>
-        <h2>Mur des signatures</h2>
+        <!--<h2>Mur des signatures</h2>-->
         <p style="color:#e74c3c">Un site par Maxence</p>
     </div>
 </template>
