@@ -1,4 +1,7 @@
 <script>
+// Toggle button oui/non
+var btn_selected = false;
+var btn_values;
 </script>
 
 <template>
@@ -13,11 +16,11 @@
 
         <div class="parent">
             <div class="child">
-                <button class="choix">Oui</button>
+                <button class="choix coui_unselected"><strong>Oui</strong></button>
             </div>
 
             <div class="child">
-                <button class="choix">Non</button>
+                <button class="choix cnon_unselected"><strong>Non</strong></button>
             </div>
         </div>
     </div>
@@ -48,6 +51,34 @@
     font-family: Recursive, Arial, sans-serif;
     min-height: 200px;
     width: 90%;
+}
+
+.coui_unselected
+{
+    color: #2ecc71;
+    border: 6px solid #2ecc71;
+    background-color: white;
+}
+
+.cnon_unselected
+{
+    color: #e74c3c;
+    background-color: white;
+    border: 6px solid #e74c3c;
+}
+
+.coui_selected
+{
+    background-color: #2ecc71;
+    border: 6px solid #2ecc71;
+    color: white;
+}
+
+.cnon_selected
+{
+    background-color: #e74c3c;
+    color: white;
+    border: 6px solid #e74c3c;
 }
 
 .qtext
