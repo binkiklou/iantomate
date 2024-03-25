@@ -1,9 +1,12 @@
 <script setup>
-import HomeContent from './components/HomeContent.vue';
 </script>
 
 <template>
-  <HomeContent/>
+    <div class="wrapper">
+        <h1>Accès refusé</h1>
+        <p>Si tes censer pouvoir acceder la page, je suis dsl je fait de mon meilleur uwu</p>
+        <p>-Maxence</p>
+    </div>
 </template>
 
 <style>
@@ -19,9 +22,16 @@ h2{
 h5{
   color: white;
 }
+
 body {
   font-family: Recursive, Arial, sans-serif;
   background-image: url("./assets/ianto2.png");
   background-repeat: repeat;
+}
+
+.wrapper{
+    background-color: black;
+    text-align:center;
+    padding: 12px;
 }
 </style>
