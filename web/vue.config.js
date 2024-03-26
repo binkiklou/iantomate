@@ -9,6 +9,10 @@ module.exports = defineConfig({
     fuck:{
       entry:'src/fuckmain.js',
       filename:'fuck.html'
+    },
+    termes:{
+      entry:'src/termsmain.js',
+      filename:'termes.html'
     }
   }
 })

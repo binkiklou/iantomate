@@ -11,6 +11,7 @@ const message = ref('Question très importante!');
 function update_parts(){
     if(ok_valid.value){
         part.value++;
+        console.log(part.value);
         ok_valid.value = false;
     }
 }
@@ -19,6 +20,8 @@ function update_parts(){
 const oui_selected = ref(false);
 const non_selected = ref(false);
 const any_selected = ref(false);
+
+const choix_txt = ref('?!?');
 
 // Fait aussi la logique pour select oui
 function select_oui(oui)
@@ -29,14 +32,28 @@ function select_oui(oui)
     {
         oui_selected.value = true;
         non_selected.value = false;
+
+        choix_txt.value = 'Oui';
     }
     else
     {
         non_selected.value = true;
         oui_selected.value = false;
+
+        choix_txt.value = 'Non';
     }
 
     ok_valid.value = true;
+}
+
+// --- P3 ---
+const nom_txt = ref('');
+
+function update_signature()
+{
+    if(nom_txt.value.length >= 3){
+        ok_valid.value = true;
+    }
 }
 
 </script>
@@ -71,14 +88,14 @@ function select_oui(oui)
         <p>
             Votre Signature:
         </p>
-        <input type="text">
+        <input type="text" v-model="nom_txt" @input="update_signature">
     </div>
 
     <div class="fancy" :class="{oksee:part>=4,dontsee:part<4}">
         <p>
-            Moi, ???, je vote que ???, Ianthomate.
+            Moi, <b>{{ nom_txt }}</b>, je vote que <span :class="{trouge:!oui_selected,tvert:oui_selected}">{{ choix_txt }}</span>, Ianthomate.
         </p>
-        <h6>J'accepte les <span style="color:#3498db;">termes et conditions</span>.</h6>
+        <h6>J'accepte les <a href="/termes" target="_blank"><span style="color:#3498db;">termes et conditions</span></a>.</h6>
         <button>FINI</button>
     </div>
 
@@ -116,6 +133,7 @@ function select_oui(oui)
     font-family: Recursive, Arial, sans-serif;
     min-height: 20vh;
     width: 90%;
+    font-size: 24px;
     transition: all 1s;
 }
 .coui_unselected
@@ -204,5 +222,11 @@ function select_oui(oui)
 {
     background-color: #ecf0f1;
     color: white;
+}
+.trouge{
+    color: #e74c3c;
+}
+.tvert{
+    color: #2ecc71;
 }
 </style>
