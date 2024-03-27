@@ -88,7 +88,7 @@ function update_signature()
         <p>
             Votre Signature:
         </p>
-        <input type="text" v-model="nom_txt" @input="update_signature">
+        <input type="text" class="sign_input" v-model="nom_txt" @input="update_signature">
     </div>
 
     <div class="fancy" :class="{oksee:part>=4,dontsee:part<4}">
@@ -96,7 +96,7 @@ function update_signature()
             Moi, <b>{{ nom_txt }}</b>, je vote que <span :class="{trouge:!oui_selected,tvert:oui_selected}">{{ choix_txt }}</span>, Ianthomate.
         </p>
         <h6>J'accepte les <a href="/termes" target="_blank"><span style="color:#3498db;">termes et conditions</span></a>.</h6>
-        <button>FINI</button>
+        <button class="okok">FINI</button>
     </div>
 
     <br/>
@@ -110,7 +110,6 @@ function update_signature()
 {
     transition: max-height 2s ease, opacity 1s linear, scale 1s linear;
 }
-
 .dontsee
 {
     scale: 0;
@@ -118,7 +117,6 @@ function update_signature()
     height: fit-content;
     max-height: 0px;
 }
-
 .oksee
 {
     /*scale: 1;*/
@@ -228,5 +226,20 @@ function update_signature()
 }
 .tvert{
     color: #2ecc71;
+}
+.sign_input
+{
+    transition: border-radius 500ms;
+    width: 40%;
+    font-size: 18px;
+    background-color: white;
+    color: black;
+    padding-left: 10px;
+    border: none;
+    border-radius: 0px;
+}
+.sign_input:focus{
+    background-color: #ecf0f1;
+    border-radius: 12px;
 }
 </style>
