@@ -51,6 +51,7 @@ const nom_txt = ref('');
 
 function update_signature()
 {
+    nom_txt.value = nom_txt.value.replace(/[^A-z]/gm, '');
     if(nom_txt.value.length >= 3){
         ok_valid.value = true;
     }
@@ -91,7 +92,10 @@ async function submit_answers()
                     {
                         console.log('yay');
                         localStorage.setItem("sent", true);
+
                         localStorage.setItem("votreVote",c);
+                        localStorage.setItem("votreNom",n);
+
                         status_txt.value = "Pas censez pouvoir voir sa ahah";
                         location.reload();
                     }
