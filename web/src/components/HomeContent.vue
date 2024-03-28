@@ -9,7 +9,7 @@ import Credits from './Credits.vue';
 
 // Utilisateur privlegier(pas la premiere visite)
 const priv = ref(false);
-var s = sessionStorage.getItem("sent");
+var s = localStorage.getItem("sent");
 console.log(s);
 if(s != undefined && s == 'true'){
     priv.value = true;

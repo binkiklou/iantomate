@@ -35,13 +35,16 @@ app.post('/signature', (req, res, next) => {
 
         signature.add(req.body['nom'], req.body['choix'], (succ) => {
             if(!succ){
-                console.log('not yay')
-                return;
+                console.log('Erreur lors de add');
+                res.status(400);
+                next();
             }
-            console.log('probablement good')
-            var r = prefab;
-            r.type = "yay";
-            res.send(r);
+            else {
+                console.log('probablement good')
+                var r = prefab;
+                r.type = "yay";
+                res.send(r);
+            }
         });
     }
     catch(e){

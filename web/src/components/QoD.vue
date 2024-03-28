@@ -90,7 +90,7 @@ async function submit_answers()
                     if(r['type'] && r['type'] == 'yay')
                     {
                         console.log('yay');
-                        sessionStorage.setItem("sent", true);
+                        localStorage.setItem("sent", true);
                         status_txt.value = "Pas censez pouvoir voir sa ahah";
                         location.reload();
                     }

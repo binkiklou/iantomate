@@ -11,9 +11,16 @@ module.exports = {
         if(cb == undefined){
             cb = function(){};
         }
+        // NOTE: Doit limiter taille du nom!
+        if(typeof(nom) !== 'string'){
+            cb(false);
+            return;
+        }
+        let nom_safe = nom.slice(0,26);
+        // Doit sanitizer aussi
         db.run(
             `INSERT INTO signataires VALUES (?, "${choix}")`,
-            [nom],
+            [nom_safe],
             (err) => {
                 if(err !== null){
                     console.error(err);
