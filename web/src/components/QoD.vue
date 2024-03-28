@@ -58,6 +58,9 @@ function update_signature()
 
 // --- SUBMIT ---
 
+const show_status = ref(false);
+const status_txt = ref('');
+
 async function submit_answers()
 {
     let c = choix_txt.value;
@@ -67,7 +70,11 @@ async function submit_answers()
         "nom":n
     };
 
-    const resp = await fetch('http://172.21.102.45:3000/',
+    show_status.value = true;
+
+    status_txt.value = "En attente de reponse du serveur.."
+
+    const resp = fetch('http://172.21.102.45:3000/signature',
     {
         method: "POST",
         mode:"cors",
@@ -75,9 +82,21 @@ async function submit_answers()
             "Content-Type":"application/json"
         },
         body: JSON.stringify(packet)
-    });
+    }).then(
+        async (result)=>{
+            status_txt.value = "Probablement ok, jai aucune idee";
+            console.log(result.json().then(
+                (r)=>{location.reload()},
+                (e)=>{status_txt.value = "Erreur vrm random on sen fou"; location.reload()}
+            ));
+        },
+        (err)=>{
+            console.error("erreur dans  la requete");
+            status_txt.value = "Erreur lors de la requete";
+        }
+    );
 
-    console.log(resp.body);
+    //console.log(await resp.json());
 }
 
 </script>
@@ -125,6 +144,8 @@ async function submit_answers()
     </div>
 
     <br/>
+
+    <h3 v-show="show_status">{{ status_txt }}</h3>
 
     <button class="fancy okbtn" :class="{okok:ok_valid, oknon:!ok_valid}" v-show="part<4" @click="update_parts()"><h3>OK</h3></button>
 </template>

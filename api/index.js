@@ -5,9 +5,11 @@ const port = 3000;
 
 const prefab = require("./prefab.json");
 
-var db = require('./db');
+//var db = require('./db');
+const signature = require('./signatures');
 
 app.use(cors());
+app.use(express.json());
 
 app.get('/', (req, res) => {
     //res.setHeader('Content-Type', ' application/json');
@@ -23,13 +25,26 @@ app.get('/', (req, res) => {
 
 app.post('/signature', (req, res, next) => {
     try{
-        var rbody = JSON.parse(req.body);
+        console.log(req.body);
+
+        if(req.body['choix'] == undefined || req.body['nom'] == undefined){
+            next();
+            return;
+        }
+
+        signature.add(req.body['nom'], req.body['choix'], (succ) => {
+            if(!succ){
+                console.log('not yay')
+                return;
+            }
+            console.log('probablement good')
+        });
+
         var r = prefab;
-        r.type = "yay";
-        r.data = undefined;
         res.send(r);
     }
     catch(e){
+        console.log('fuck!');
         next();
     }
 });
