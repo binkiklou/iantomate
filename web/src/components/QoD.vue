@@ -56,6 +56,30 @@ function update_signature()
     }
 }
 
+// --- SUBMIT ---
+
+async function submit_answers()
+{
+    let c = choix_txt.value;
+    let n = nom_txt.value;
+    let packet = {
+        "choix":c,
+        "nom":n
+    };
+
+    const resp = await fetch('http://172.21.102.45:3000/',
+    {
+        method: "POST",
+        mode:"cors",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body: JSON.stringify(packet)
+    });
+
+    console.log(resp.body);
+}
+
 </script>
 
 <template>
@@ -65,6 +89,7 @@ function update_signature()
     </div>
 
     <div class="fancy" :class="{oksee:part>=2,dontsee:part<2}">
+        <h2>Pensez vous que...</h2>
         <h1 class="qtext">
             Ian-Tomate?
         </h1>
@@ -96,7 +121,7 @@ function update_signature()
             Moi, <b>{{ nom_txt }}</b>, je vote que <span :class="{trouge:!oui_selected,tvert:oui_selected}">{{ choix_txt }}</span>, Ianthomate.
         </p>
         <h6>J'accepte les <a href="/termes" target="_blank"><span style="color:#3498db;">termes et conditions</span></a>.</h6>
-        <button class="okok">FINI</button>
+        <button class="okok" @click="submit_answers">FINI</button>
     </div>
 
     <br/>
