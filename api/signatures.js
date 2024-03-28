@@ -19,8 +19,8 @@ module.exports = {
         let nom_safe = nom.slice(0,26);
         // Doit sanitizer aussi
         db.run(
-            `INSERT INTO signataires VALUES (?, "${choix}")`,
-            [nom_safe],
+            `INSERT INTO signataires VALUES (?, ?)`,
+            [nom_safe, choix],
             (err) => {
                 if(err !== null){
                     console.error(err);

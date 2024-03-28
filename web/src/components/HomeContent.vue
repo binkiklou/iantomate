@@ -6,6 +6,7 @@ import QoD from './QoD.vue';
 import Signatures from './Signatures.vue';
 import Stats from './Stats.vue';
 import Credits from './Credits.vue';
+import VotreVote from './VotreVote.vue';
 
 // Utilisateur privlegier(pas la premiere visite)
 const priv = ref(false);
@@ -35,6 +36,7 @@ setInterval(()=>{
     <div id="main-content">
         <QoD v-show="priv==false"/>
         <div v-show="priv">
+            <VotreVote/>
             <Signatures/>
             <Stats/>
             <Credits/>
