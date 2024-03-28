@@ -25,8 +25,14 @@ module.exports = {
                 }
             });
     },
-    listAll:function()
+    listAll:function(cb)
     {
-
+        var data = [];
+        db.all("SELECT nom, vote FROM signataires;", (err, rows) => {
+            rows.forEach((row) => {
+                data.push(row);
+            });
+            cb(data);
+        }); 
     }
 };

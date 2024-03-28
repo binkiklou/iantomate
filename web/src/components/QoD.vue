@@ -84,10 +84,18 @@ async function submit_answers()
         body: JSON.stringify(packet)
     }).then(
         async (result)=>{
-            status_txt.value = "Probablement ok, jai aucune idee";
+            status_txt.value = "Probablement ok, pas normal si c trop long";
             console.log(result.json().then(
-                (r)=>{location.reload()},
-                (e)=>{status_txt.value = "Erreur vrm random on sen fou"; location.reload()}
+                (r)=>{
+                    if(r['type'] && r['type'] == 'yay')
+                    {
+                        console.log('yay');
+                        sessionStorage.setItem("sent", true);
+                        status_txt.value = "Pas censez pouvoir voir sa ahah";
+                        location.reload();
+                    }
+                },
+                (e)=>{status_txt.value = "Erreur vrm random on sen criss"; location.reload()}
             ));
         },
         (err)=>{
@@ -102,6 +110,7 @@ async function submit_answers()
 </script>
 
 <template>
+<div>
     <div :class="{oksee:part==1,dontsee:part!=1}" >
         <h1>Question très <strong class="blinker">importante!</strong></h1>
         <p>Cliquez sur <span class="qtext">OK</span> pour commencer.</p>
@@ -148,6 +157,7 @@ async function submit_answers()
     <h3 v-show="show_status">{{ status_txt }}</h3>
 
     <button class="fancy okbtn" :class="{okok:ok_valid, oknon:!ok_valid}" v-show="part<4" @click="update_parts()"><h3>OK</h3></button>
+</div>
 </template>
 
 <style>
